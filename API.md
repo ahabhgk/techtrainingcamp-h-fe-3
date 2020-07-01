@@ -1,7 +1,7 @@
 
-# API
+# API 1.0
 
-项目中用到的后端api
+项目中(可能)用到的后端api
 
 ---
 
@@ -16,7 +16,7 @@
   "status": 200,
   "data": {
     "token": "player's token",
-    "role":  "wereWolf|civilian|...",
+    "role":  "wereWolf|villager|...",
   }
 }
 
@@ -60,7 +60,7 @@
 {
   "status": 200,
   "data": {
-    "role": "wereWolf|civilian|god|...",
+    "role": "wereWolf|villager|god|...",
     "status" : "dead|alive|gameOver",
     "time": "day|night",
     "power": "none(无技能或还未到使用技能时机)|available(狼人, 预言家等可以使用技能)|available[123](女巫可以使用 1:灵药, 2:毒药, 3:两者",
