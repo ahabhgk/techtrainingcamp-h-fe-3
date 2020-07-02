@@ -1,5 +1,7 @@
 
-# API 1.1.1
+# API (线下版)
+
+> version: 1.0
 
 项目中(可能)用到的后端api
 
@@ -62,17 +64,18 @@
     "time": "day|night|gameOver",
     "day": <第几天>(数字类型),
     "voteResult": "<玩家名字|空串(如果还没投票)|__fool(投到了白痴)>",
-    "nightResult": ["<玩家名字>", "..."],  // 晚上死的玩家们, 空数组表示平安夜
+    "werewolfTarget": "<玩家名字>",  // 晚上被狼人杀的人
     "hunterTarget": "<玩家名字>|空串(如果猎人还没死)|__nobody(如果放弃使用技能)",
     "sheriffTarget": "<玩家名字>|空串(如果警长还没死)|__nobody(如果撕警徽)",
-    "saved": "<女巫救的人的名字>|__nobody"
+    "saved": "<女巫救的人的名字>|__nobody",
+    "poisoned": "<女巫杀的人的名字>|__nobody"
   }
 }
 ```
 
 ---
 
-`GET /player/vote?for=<sheriff|werewolf>&room=<room id>&token=<token>`
+`GET /player/vote?for=<sheriff|werewolf>&room=<room id>&token=<token>&target=<target name>`
 
 玩家投票选警长/狼人
 
