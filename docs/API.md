@@ -1,5 +1,5 @@
 
-# API 1.1
+# API 1.1.1
 
 项目中(可能)用到的后端api
 
@@ -57,7 +57,7 @@
       "role": "wereWolf|villager|...",
       "isSheriff": true|false,
       "status" : "dead|alive",
-      "power": "none(无技能或还未到使用技能时机)|available(狼人, 预言家等可以使用技能)|available[123](女巫可以使用 1:灵药, 2:毒药, 3:两者",
+      "power": "none(无技能或还未到使用技能时机)|available(狼人, 预言家等可以使用技能)|available[0123](女巫可以使用 0:无技能, 1:灵药, 2:毒药, 3:两者",
     },
     "time": "day|night|gameOver",
     "day": <第几天>(数字类型),
@@ -65,6 +65,7 @@
     "nightResult": ["<玩家名字>", "..."],  // 晚上死的玩家们, 空数组表示平安夜
     "hunterTarget": "<玩家名字>|空串(如果猎人还没死)|__nobody(如果放弃使用技能)",
     "sheriffTarget": "<玩家名字>|空串(如果警长还没死)|__nobody(如果撕警徽)",
+    "saved": "<女巫救的人的名字>|__nobody"
   }
 }
 ```
@@ -100,7 +101,7 @@
 {
   "status": 200,
   "data": {
-    "msg": "return message"
+    "msg": "<werewolf|villager(预言家的技能, 查验的身份)>|<name(最后狼人决定杀掉的人的名字)>|<ok|retry(守卫如果连续两晚守护同一个人, 返回retry, 并重新释放技能)>|ok(女巫)"
   }
 }
 ```
@@ -157,6 +158,23 @@
 }
 ```
 
+---
+
+`GET /god/endGame?room=<room id>&token=<token>`
+
+提前结束游戏
+
+返回值:
+
+```json
+{
+  "status": 200,
+  "data": {
+    "msg": "return msg"
+  }
+}
+```
+
 ## other
 
 `GET /game/result?room=<room id>`
@@ -177,8 +195,7 @@
         "status" : "dead|alive",
         "killedAt": "<第几天>(数字类型, -1代表没死)",
         "killedBy": "<玩家名字>|__nobody(代表没死)| __vote(代表被票死)",
-        "pointGained": <本局获得的积分(数字)>,
-        "totalPoints": <玩家总计积分(数字)>
+        "points": <玩家总计胜场(数字)>
       },
       {
         // ...
@@ -188,7 +205,7 @@
 }
 ```
 
-`GET /game/bestPlayers`
+`GET /game/topPlayers`
 
 获取积分榜
 
@@ -201,7 +218,7 @@
     "players": [
       {
         "name": "<玩家名字>",
-        "totalPoints": <玩家总计积分(数字)>
+        "points": <玩家总计胜场(数字)>
       },
       {
         // ...
