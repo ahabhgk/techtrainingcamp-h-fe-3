@@ -43,17 +43,7 @@
 
 2. commit message 规范
 
-    遵循 Angular Commit 规范，格式如下：
-
-    ```git
-    <type>(<scope>): <subject>
-    // 空一行
-    <body>
-    // 空一行
-    <footer>
-    ```
-
-    为了方便编写遵循规范的 commit message，我们使用 Commitizen 进行 git commit
+    遵循 Angular Commit 规范，为了方便编写遵循规范的 commit message，我们使用 Commitizen 进行 git commit
 
     1. 先安装 commitizen
 
@@ -64,6 +54,8 @@
     2. 安装好以后，凡是用到 git commit 命令，一律改为使用 git cz。这时，就会出现选项，用来生成符合格式的 Commit message
 
         ![git cz](./docs/assets/git-cz.png)
+
+    > 更多详见 [Commit message 和 Change log 编写指南](https://www.ruanyifeng.com/blog/2016/01/commit_message_change_log.html)
 
 3. 提交代码规范
 
@@ -85,4 +77,4 @@
 
     - 使用 [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport) 进行移动端 vw 适配，编写时直接按照 375px 宽度移动端的视觉稿进行编写即可（简单认为手机屏幕宽度为 375px，postcss 会自动适配其他宽度的手机）
 
-    - 使用 GitHub Action 进行 CI 配置，master 分支更新后会自动发布到 GitHub Page
+    - 使用 GitHub Actions 进行 CI 配置，master 分支更新后会自动发布到 GitHub Page
