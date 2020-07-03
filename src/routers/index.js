@@ -3,22 +3,22 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-const someRoute = () => import('views/someRoute/someRoute');
+// const someRoute = () => import('views/someRoute/someRoute');
 
 const routes = [
-  {
-    path: '',
-    redirect: '/home',
-  },
-  {
-    path: '/home',
-    component: someRoute,
-  },
+  // {
+  //   path: '',
+  //   redirect: '/home',
+  // },
+  // {
+  //   path: '/home',
+  //   component: someRoute,
+  // },
 ];
 
 const router = new VueRouter({
   routes,
-  mode: 'history',
+  mode: 'hash',
 });
 
 export default router;

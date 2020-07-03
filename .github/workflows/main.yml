@@ -21,11 +21,11 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-    
-    - name: buildAndDeploy
+
+    - name: deploy
       uses: JamesIves/github-pages-deploy-action@master 
       env:
         ACCESS_TOKEN: ${{ secrets.ACTION_TOKEN }}
-        BRANCH: gh-pages # 存放产物的分支名称
-        FOLDER: dist # 存放build后产物的目录
-        BUILD_SCRIPT: npm install && npm run build # 执行的命令
+        BRANCH: gh-pages
+        FOLDER: dist
+        BUILD_SCRIPT: npm install && npm run build

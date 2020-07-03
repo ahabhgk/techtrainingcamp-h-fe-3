@@ -6,6 +6,11 @@ function resolve(dir) {
 }
 
 module.exports = {
+  outputDir: 'dist',
+  publicPath: process.env.NODE_ENV === 'production'
+    ? '/techtrainingcamp-h-fe-3/'
+    : '/',
+
   chainWebpack: (config) => {
     config.resolve.alias
       .set('@', resolve('./src'))
