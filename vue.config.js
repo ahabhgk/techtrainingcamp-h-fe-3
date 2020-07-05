@@ -16,9 +16,10 @@ module.exports = {
       .set('@', resolve('./src'))
       .set('components', resolve('./src/components'))
       .set('assets', resolve('./src/assets'))
-      .set('common', resolve('./src/common'))
       .set('network', resolve('./src/network'))
-      .set('views', resolve('./src/views'));
+      .set('views', resolve('./src/views'))
+      .set('constants', resolve('./src/constants'))
+      .set('utils', resolve('./src/utils'));
   },
 
   css: {

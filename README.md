@@ -70,9 +70,10 @@
           .set('@', resolve('./src'))
           .set('components', resolve('./src/components'))
           .set('assets', resolve('./src/assets'))
-          .set('common', resolve('./src/common'))
           .set('network', resolve('./src/network'))
-          .set('views', resolve('./src/views'));
+          .set('views', resolve('./src/views'))
+          .set('constants', resolve('./src/constants'))
+          .set('utils', resolve('./src/utils'));
         ```
 
     - 使用 [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport) 进行移动端 vw 适配，编写时直接按照 375px 宽度移动端的视觉稿进行编写即可（简单认为手机屏幕宽度为 375px，postcss 会自动适配其他宽度的手机）
