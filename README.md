@@ -78,3 +78,5 @@
     - 使用 [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport) 进行移动端 vw 适配，编写时直接按照 375px 宽度移动端的视觉稿进行编写即可（简单认为手机屏幕宽度为 375px，postcss 会自动适配其他宽度的手机）
 
     - 使用 GitHub Actions 进行 CI 配置，master 分支更新后会自动发布到 GitHub Page
+
+    - UI 风格可参考 [https://www.zcool.com.cn/work/ZMjE3Mzk1NTI=.html](https://www.zcool.com.cn/work/ZMjE3Mzk1NTI=.html)；卡片可参考 [https://www.zcool.com.cn/work/ZMzQ0Nzc1MjA=.html](https://www.zcool.com.cn/work/ZMzQ0Nzc1MjA=.html)；小图标可参考 [https://www.zcool.com.cn/work/ZMzkyMzQ5MDQ=.html](https://www.zcool.com.cn/work/ZMzkyMzQ5MDQ=.html)
