@@ -59,7 +59,7 @@
 
 3. 提交代码规范
 
-    我们通过 GitHub 仓库中的 project 管理 todolist，在编写新 feature 时开一个新的 git 分支，之后在 fix bug 等时也在对应分支下进行修改，push 到远程仓库（GitHub）后经过小组其他人进行 Code Review 后再合并到 master
+    我们通过 GitHub 仓库中的 project 和 docs 中的需求文档管理 todolist，在编写新 feature 时开一个新的 git 分支，之后在 fix bug 等时也在对应分支下进行修改，push 到远程仓库（GitHub）后经过小组其他人进行 Code Review 后再合并到 master
 
 4. 其他应该注意的
 
@@ -78,6 +78,10 @@
 
     - 使用 [postcss-px-to-viewport](https://github.com/evrone/postcss-px-to-viewport) 进行移动端 vw 适配，编写时直接按照 375px 宽度移动端的视觉稿进行编写即可（简单认为手机屏幕宽度为 375px，postcss 会自动适配其他宽度的手机）
 
+    - `utils` 存放一些通用的工具函数、composition 函数；`assets/styles` 存放一些可公用的样式；`constants` 存放一些常量；另外 `assets/images/player` 存放了一些游戏角色头像。请提前阅读相应目录下的 README，注意**复用**
+
+    - 随时输出文档，编写可复用的代码后请**及时编写文档**，方便他人使用
+
     - 使用 GitHub Actions 进行 CI 配置，master 分支更新后会自动发布到 GitHub Page
 
-    - UI 风格可参考 [https://www.zcool.com.cn/work/ZMjE3Mzk1NTI=.html](https://www.zcool.com.cn/work/ZMjE3Mzk1NTI=.html)；卡片可参考 [https://www.zcool.com.cn/work/ZMzQ0Nzc1MjA=.html](https://www.zcool.com.cn/work/ZMzQ0Nzc1MjA=.html)；小图标可参考 [https://www.zcool.com.cn/work/ZMzkyMzQ5MDQ=.html](https://www.zcool.com.cn/work/ZMzkyMzQ5MDQ=.html)
+    - UI 风格可参考[这个](https://www.zcool.com.cn/work/ZMjE3Mzk1NTI=.html)；卡片可参考[这个](https://www.zcool.com.cn/work/ZMzQ0Nzc1MjA=.html)和[这个](https://www.zcool.com.cn/work/ZMzkyMzQ5MDQ=.html)。可使用 [removebg](https://www.remove.bg/zh) 的工具进行抠图
