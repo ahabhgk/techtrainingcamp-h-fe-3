@@ -84,4 +84,4 @@
 
     - 使用 GitHub Actions 进行 CI 配置，master 分支更新后会自动发布到 GitHub Page
 
-    - UI 风格可参考[这个](https://www.zcool.com.cn/work/ZMjE3Mzk1NTI=.html)；卡片可参考[这个](https://www.zcool.com.cn/work/ZMzQ0Nzc1MjA=.html)和[这个](https://www.zcool.com.cn/work/ZMzkyMzQ5MDQ=.html)。可使用 [removebg](https://www.remove.bg/zh) 的工具进行抠图
+    - UI 风格可参考[这个](https://www.zcool.com.cn/work/ZMjE3Mzk1NTI=.html)和[这个](https://www.uplabs.com/posts/to-do-task-list-dark-app-version)；卡片可参考[这个](https://www.zcool.com.cn/work/ZMzQ0Nzc1MjA=.html)和[这个](https://www.zcool.com.cn/work/ZMzkyMzQ5MDQ=.html)。可使用 [removebg](https://www.remove.bg/zh) 的工具进行抠图
