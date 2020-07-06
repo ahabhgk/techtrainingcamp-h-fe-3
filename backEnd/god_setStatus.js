@@ -46,13 +46,13 @@ module.exports = async function godSetStatus({
       break;
     case 'protected': break;
     case 'poisoned':
-      target.killedBy = target.killedBy || 'witch';
+      target.killedBy = target.killedBy === '__nobody' ? 'witch' : target.killedBy;
     case 'killed':
-      target.killedBy = target.killedBy || 'werewolf';
+      target.killedBy = target.killedBy === '__nobody' ? 'werewolf' : target.killedBy;
     case 'shot':
-      target.killedBy = target.killedBy || 'hunter';
+      target.killedBy = target.killedBy === '__nobody' ? 'hunter' : target.killedBy;
     case 'voted':
-      target.killedBy = target.killedBy || 'vote';
+      target.killedBy = target.killedBy === '__nobody' ? 'vote' : target.killedBy;
       target.status = 'dead';
       target.killedAt = roomItem.day;
       break;
