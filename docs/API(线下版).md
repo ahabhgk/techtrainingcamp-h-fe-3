@@ -162,7 +162,7 @@
 ```
 ## other
 
-`GET /game/result?room=<room id>`
+`GET https://afbx35.fn.thelarkcloud.com/game_allAtatus?room=<room id>`
 
 根据房间号获取游戏结果
 
@@ -198,7 +198,7 @@
 }
 ```
 
-`GET /game/topPlayers`
+`GET https://afbx35.fn.thelarkcloud.com/game_topPlayers`
 
 获取积分榜
 
