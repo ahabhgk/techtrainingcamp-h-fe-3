@@ -9,7 +9,7 @@
 
 ---
 
-`GET /player/start?room=<room id>&name=<user name>`
+`GET https://afbx35.fn.thelarkcloud.com/player_start?room=<room id>&name=<user name>`
 
 玩家设置名字, 加入特定房间号
 
@@ -29,6 +29,14 @@
   "status": 401,
   "data": {
     "msg": "error mesage"
+  }
+}
+
+// 如果名字重复
+{
+  "status": 403,
+  "data": {
+    "msg": "conflict name"
   }
 }
 ```
