@@ -20,6 +20,7 @@ module.exports = async function godStart({ room, token, winner }) {
   }
 
   roomItem.winner = winner || 'nobody';
+  roomItem.time = 'gameOver';
   await RoomTable.save(roomItem);
 
   // update players
@@ -31,7 +32,11 @@ module.exports = async function godStart({ room, token, winner }) {
     .find();
 
   for (const player of players) {
-    player.time = 'gameOver';
+    if (player.role === 'werewolf' && winner === 'werewolf') {
+      player.points += 1;
+    } else if (player.role !== 'werewolf' && winner === 'villager') {
+      player.points += 1;
+    }
   }
   await PlayerTable.save(players);
 
