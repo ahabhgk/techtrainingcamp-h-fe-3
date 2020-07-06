@@ -66,7 +66,7 @@
 
 ## god
 
-`GET /god/start?playerNum=<>`
+`GET https://afbx35.fn.thelarkcloud.com/god_start?playerNum=<>`
 
 上帝创建房间, 并设置房间人数
 
