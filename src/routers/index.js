@@ -3,17 +3,22 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-// const someRoute = () => import('views/someRoute/someRoute');
+const Home = () => import('views/Home');
+const GodGame = () => import('views/god/Game');
 
 const routes = [
-  // {
-  //   path: '',
-  //   redirect: '/home',
-  // },
-  // {
-  //   path: '/home',
-  //   component: someRoute,
-  // },
+  {
+    path: '',
+    redirect: '/home',
+  },
+  {
+    path: '/home',
+    component: Home,
+  },
+  {
+    path: '/god/game',
+    component: GodGame,
+  },
 ];
 
 const router = new VueRouter({

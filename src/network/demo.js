@@ -1,8 +1,8 @@
-import { request } from "./request";
+import request from './request';
 
 export function someMethod(someParam) {
   return request({
-    url: `somePath/${someParam}`
+    url: `somePath/${someParam}`,
     // 默认请求方法是 get
   });
 }
@@ -13,7 +13,7 @@ export function anotherMethod(param, someData) {
     data: someData,
     method: 'post',
     headers: {
-      "Content-Type": "application/json;"
-    }
+      'Content-Type': 'application/json;',
+    },
   });
 }

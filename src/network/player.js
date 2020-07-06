@@ -1,9 +1,9 @@
-import { request } from "./request";
+import request from './request';
 
 export function getStatus(someParam) {
   // 获得当前游戏信息: 是否死亡, 白天/黑夜, 是否能发动技能, 自己的身份
   return request({
-    url: `somePath/${someParam}`
+    url: `somePath/${someParam}`,
     // 默认请求方法是 get
   });
 }
@@ -15,7 +15,7 @@ export function usePower(param, someData) {
     data: someData,
     method: 'post',
     headers: {
-      "Content-Type": "application/json;"
-    }
+      'Content-Type': 'application/json;',
+    },
   });
 }

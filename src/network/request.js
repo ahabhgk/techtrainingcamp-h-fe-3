@@ -1,25 +1,21 @@
-import axios from "axios";
+import axios from 'axios';
 
-export function request(config) {
-  const instance = axios.create({
-    baseURL: "http://foo.bar.baz/",
-    timeout: 5000
-  });foo.bar.baz
+const instance = axios.create({
+  baseURL: 'http://foo.bar.baz/',
+  timeout: 5000,
+});
 
-  instance.interceptors.request.use(
-    config => {
-      return config;
-    },
-    err => { }
-  );
+instance.interceptors.request.use(
+  (config) => config,
+  (err) => { throw err; },
+);
 
-  instance.interceptors.response.use(
-    response => {
-      return response.data;
-    },
-    err => { }
-  );
+instance.interceptors.response.use(
+  (response) => response.data,
+  (err) => { throw err; },
+);
 
+export default function request(config) {
   // return a Promise
   return instance(config);
 }
