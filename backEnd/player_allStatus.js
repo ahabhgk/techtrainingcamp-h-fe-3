@@ -45,6 +45,9 @@ module.exports = async function playerAllStatus({ room, token }) {
     data: {
       players,
       self: {
+        name: curPlayerItem.name,
+        status: curPlayerItem.status,
+        isSheriff: curPlayerItem.isSheriff,
         role: curPlayerItem.role,
       },
       time: roomItem.time,

@@ -43,7 +43,7 @@
 
 ---
 
-`GET /player/allStatus?room=<room id>&token=<token>`
+`GET https://afbx35.fn.thelarkcloud.com/player_allStatus?room=<room id>&token=<token>`
 
 玩家获得当前游戏状态
 
@@ -63,7 +63,10 @@
         // ...
       }
     ],
-    "self": { //自己的角色
+    "self": {
+      "name": "<玩家名字>",
+      "status" : "dead|alive",
+      "isSheriff": true|false,
       "role": "wereWolf|villager|..."
     },
     "time": "day|night|gameOver",
