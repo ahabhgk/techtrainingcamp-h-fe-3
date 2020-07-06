@@ -9,10 +9,9 @@
 - roomID
 - godToken
 - winner
-- playerNumber
+- roles
 - time
 - day
-- sheriffNumber
 
 ## players
 

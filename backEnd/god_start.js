@@ -1,4 +1,5 @@
-module.exports = async function ({ playerNum }, context) {
+/* eslint-disable no-undef */
+module.exports = async function godStart({ playerNum }) {
   if (!playerNum || playerNum > 12 || playerNum < 6) {
     return {
       status: '400',
@@ -6,18 +7,21 @@ module.exports = async function ({ playerNum }, context) {
     };
   }
 
-  const roomID = (Math.random() * 9e5 + 1e5) >>> 0;
+  const roomID = Math.floor(Math.random() * 9e5 + 1e5);
   const godToken = (Math.random() * 1e17).toString(36);
-  const sheriffNumber = (Math.random() * playerNum + 1) >>> 0;
+  const roles = [
+    ['villager', 'villager', 'villager', 'werewolf', 'werewolf', 'witch'],
+    ['villager', 'villager', 'villager', 'villager', 'werewolf', 'werewolf', 'witch'],
+    ['villager', 'villager', 'seer', 'hunter', 'werewolf', 'werewolf', 'werewolf', 'witch'],
+  ];
 
   const roomInfo = {
     roomID,
     godToken,
     winner: '',
-    playerNum,
     time: 'night',
     day: 0,
-    sheriffNumber,
+    roles: roles[playerNum - 6],
   };
 
   const RoomTable = larkcloud.db.table('rooms');
