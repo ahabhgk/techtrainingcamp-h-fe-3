@@ -96,7 +96,7 @@
 
 ---
 
-`GET /god/endGame?room=<room id>&token=<token>&winner=<werewolf|villager|nobody>`
+`GET https://afbx35.fn.thelarkcloud.com/god_endGame?room=<room id>&token=<token>&winner=<werewolf|villager|nobody>`
 
 提前结束游戏, 并设置胜者
 
@@ -113,7 +113,7 @@
 
 ---
 
-`GET /god/setStatus?name=<player name>&status=<status>&room=<room id>&token=<token>`
+`GET https://afbx35.fn.thelarkcloud.com/god_setStatus?name=<player name>&status=<status>&room=<room id>&token=<token>`
 
 上帝设置玩家玩家状态(死了?成为警长?被守卫保了?...)
 
