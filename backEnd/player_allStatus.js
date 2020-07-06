@@ -6,10 +6,10 @@ module.exports = async function playerAllStatus({ room, token }) {
   yesterday.setDate(yesterday.getDate() - 1);
 
   // get tables
-  const roomTable = larkcloud.db.table('rooms');
-  const playerTable = larkcloud.db.table('players');
+  const RoomTable = larkcloud.db.table('rooms');
+  const PlayerTable = larkcloud.db.table('players');
 
-  const curPlayerItem = await playerTable
+  const curPlayerItem = await PlayerTable
     .where({ roomID, token })
     .findOne();
 
@@ -23,7 +23,7 @@ module.exports = async function playerAllStatus({ room, token }) {
   }
 
   // get player info
-  let players = await playerTable
+  let players = await PlayerTable
     .where({ roomID })
     .where('updatedAt')
     .gt(yesterday)
@@ -34,7 +34,7 @@ module.exports = async function playerAllStatus({ room, token }) {
     isSheriff: it.isSheriff,
   }));
   // get room info
-  const roomItem = await roomTable
+  const roomItem = await RoomTable
     .where({ roomID })
     .where('updatedAt')
     .gt(yesterday)

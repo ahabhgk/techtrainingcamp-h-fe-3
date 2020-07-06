@@ -12,12 +12,12 @@ module.exports = async function playerStart({ room, name }) {
   yesterday.setDate(yesterday.getDate() - 1);
 
   // get tables
-  const roomTable = larkcloud.db.table('rooms');
-  const playerTable = larkcloud.db.table('players');
+  const RoomTable = larkcloud.db.table('rooms');
+  const PlayerTable = larkcloud.db.table('players');
 
   // get room info
-  // const { roomID, roles, sheriffNumber } = await roomTable
-  const roomItem = await roomTable
+  // const { roomID, roles, sheriffNumber } = await RoomTable
+  const roomItem = await RoomTable
     .where({ roomID: room * 1 })
     .where('updatedAt')
     .gt(yesterday)
@@ -43,9 +43,9 @@ module.exports = async function playerStart({ room, name }) {
   }
 
   // create or get player
-  let playerItem = await playerTable.where({ name }).findOne();
+  let playerItem = await PlayerTable.where({ name }).findOne();
   if (!playerItem) {
-    playerItem = playerTable.create({ name, points: 0 });
+    playerItem = PlayerTable.create({ name, points: 0 });
   }
 
   // init player
@@ -63,8 +63,8 @@ module.exports = async function playerStart({ room, name }) {
     isSheriff: false,
   };
   Object.assign(playerItem, playerInfo);
-  await playerTable.save(playerItem);
-  await roomTable.save(roomItem);
+  await PlayerTable.save(playerItem);
+  await RoomTable.save(roomItem);
 
   return {
     status: 200,
