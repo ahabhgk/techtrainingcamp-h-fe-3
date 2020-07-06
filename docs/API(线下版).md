@@ -132,7 +132,7 @@
 
 ---
 
-`GET /god/allStatus?room=<room id>&token=<token>`
+`GET https://afbx35.fn.thelarkcloud.com/god_allStatus?room=<room id>&token=<token>`
 
 上帝获得角色信息
 
@@ -147,6 +147,7 @@
         "name": "<玩家名字>",
         "status" : "dead|alive",
         "role": "seer|werewolf|...",
+        "isSheriff: true|false,
         "killedBy": "werewolf|vote|hunter|witch",
         "killedAt": "<第几天>(数字类型, -1代表没死)",
       },
