@@ -188,6 +188,14 @@
     ],
   }
 }
+
+// 如果游戏还未结束
+{
+  "status": 400,
+  "data": {
+    "msg": "game is still ongoing"
+  }
+}
 ```
 
 `GET /game/topPlayers`
