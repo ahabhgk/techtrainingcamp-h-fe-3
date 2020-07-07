@@ -1,4 +1,4 @@
-/* eslint-disable no-undef, import/no-unresolved */
+/* eslint-disable no-undef, import/no-unresolved, eqeqeq */
 
 const getRoom = require('./util_getRoom');
 
@@ -37,6 +37,14 @@ module.exports = async function playerStart({ room, name }) {
   // create or get player
   const PlayerTable = larkcloud.db.table('players');
   let playerItem = await PlayerTable.where({ name }).findOne();
+  if (playerItem.roomID == room) {
+    return {
+      status: 403,
+      data: {
+        msg: 'conflict name',
+      },
+    };
+  }
   if (!playerItem) {
     playerItem = PlayerTable.create({ name, points: 0 });
   }
@@ -56,6 +64,7 @@ module.exports = async function playerStart({ room, name }) {
     isSheriff: false,
   };
   Object.assign(playerItem, playerInfo);
+
   await PlayerTable.save(playerItem);
   await RoomTable.save(roomItem);
 
