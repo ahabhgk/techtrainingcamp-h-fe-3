@@ -1,17 +1,12 @@
-/* eslint-disable no-undef */
-module.exports = async function gameAllStatus({ room }) {
-  const roomID = room * 1;
-  // get baseline time
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
+/* eslint-disable no-undef, import/no-unresolved */
+const getRoom = require('./util_getRoom');
+const getPlayers = require('./util_getPlayers');
 
-  // get tables
-  const RoomTable = larkcloud.db.table('rooms');
-  const PlayerTable = larkcloud.db.table('players');
+module.exports = async function gameResult({ room }) {
+  const { roomQuery } = await getRoom(room);
+  const { playersQuery } = await getPlayers(room);
 
-  const roomItem = await RoomTable
-    .where({ roomID })
-    .findOne();
+  const roomItem = await roomQuery.findOne();
 
   if (!roomItem) {
     return {
@@ -31,11 +26,7 @@ module.exports = async function gameAllStatus({ room }) {
   }
 
   // get player info
-  const players = await PlayerTable
-    .where({ roomID })
-    .where('updatedAt')
-    .gt(yesterday)
-    .find();
+  const players = await playersQuery.find();
 
   return {
     status: 200,
