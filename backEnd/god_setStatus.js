@@ -1,4 +1,8 @@
-/* eslint-disable no-undef, no-fallthrough */
+/* eslint-disable no-undef, import/no-unresolved, no-fallthrough */
+
+const getRoom = require('./util_getRoom');
+const getPlayers = require('./util_getPlayers');
+
 module.exports = async function godSetStatus({
   name, status, room, token,
 }) {
@@ -11,14 +15,9 @@ module.exports = async function godSetStatus({
     };
   }
 
-  const roomID = room * 1;
-  // get baseline time
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-
-  const RoomTable = larkcloud.db.table('rooms');
-  const roomItem = await RoomTable
-    .where({ roomID, godToken: token })
+  const { roomQuery } = await getRoom(room);
+  const roomItem = await roomQuery
+    .where({ godToken: token })
     .findOne();
 
   if (!roomItem) {
@@ -30,11 +29,9 @@ module.exports = async function godSetStatus({
     };
   }
 
-  const PlayerTable = larkcloud.db.table('players');
-  const target = await PlayerTable
+  const { playersQuery, PlayerTable } = await getPlayers(room);
+  const target = await playersQuery
     .where({ name })
-    .where('updatedAt')
-    .gt(yesterday)
     .findOne();
 
   switch (status) {

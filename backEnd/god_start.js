@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+
 module.exports = async function godStart({ playerNum }) {
   if (!playerNum || playerNum > 12 || playerNum < 6) {
     return {
