@@ -5,13 +5,13 @@ const getPlayers = require('./util_getPlayers');
 
 module.exports = async function playerAllStatus({ room, token }) {
   const { roomQuery } = await getRoom(room);
-  const { playersQuery } = await getPlayers(room);
+  const { playersQuery, PlayerTable } = await getPlayers(room);
 
-  const curPlayerItem = await playersQuery
+  const curPlayerItem = await PlayerTable
     .where({ token })
     .findOne();
 
-  if (!curPlayerItem) {
+  if (!curPlayerItem || !token) {
     return {
       status: 401,
       data: {

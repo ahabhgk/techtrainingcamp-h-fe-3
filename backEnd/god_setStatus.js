@@ -15,12 +15,12 @@ module.exports = async function godSetStatus({
     };
   }
 
-  const { roomQuery } = await getRoom(room);
+  const { roomQuery, RoomTable } = await getRoom(room);
   const roomItem = await roomQuery
     .where({ godToken: token })
     .findOne();
 
-  if (!roomItem) {
+  if (!roomItem || !token) {
     return {
       status: 401,
       data: {
@@ -33,6 +33,15 @@ module.exports = async function godSetStatus({
   const target = await playersQuery
     .where({ name })
     .findOne();
+
+  if (!target) {
+    return {
+      status: 400,
+      data: {
+        msg: 'wrong name',
+      },
+    };
+  }
 
   switch (status) {
     case 'sheriff':

@@ -9,7 +9,7 @@ module.exports = async function godStart({ room, token, winner }) {
     .where({ godToken: token })
     .findOne();
 
-  if (!roomItem) {
+  if (!roomItem || !token) {
     return {
       status: 401,
       data: {

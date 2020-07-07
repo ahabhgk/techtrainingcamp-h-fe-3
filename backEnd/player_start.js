@@ -35,6 +35,7 @@ module.exports = async function playerStart({ room, name }) {
   }
 
   // create or get player
+  const PlayerTable = larkcloud.db.table('players');
   let playerItem = await PlayerTable.where({ name }).findOne();
   if (!playerItem) {
     playerItem = PlayerTable.create({ name, points: 0 });

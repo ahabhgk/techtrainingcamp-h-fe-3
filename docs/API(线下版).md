@@ -73,6 +73,14 @@
     "day": <第几天>(数字类型)
   }
 }
+
+// 如果token不对
+{
+  "status": 401,
+  "data": {
+    "msg": "wrong token"
+  }
+}
 ```
 
 ## god
