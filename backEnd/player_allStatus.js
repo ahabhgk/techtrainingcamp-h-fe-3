@@ -1,19 +1,17 @@
-/* eslint-disable no-undef */
-module.exports = async function playerAllStatus({ room, token }) {
-  const roomID = room * 1;
-  // get baseline time
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
+/* eslint-disable no-undef, import/no-unresolved */
 
-  // get tables
-  const RoomTable = larkcloud.db.table('rooms');
-  const PlayerTable = larkcloud.db.table('players');
+const getRoom = require('./util_getRoom');
+const getPlayers = require('./util_getPlayers');
+
+module.exports = async function playerAllStatus({ room, token }) {
+  const { roomQuery } = await getRoom(room);
+  const { playersQuery, PlayerTable } = await getPlayers(room);
 
   const curPlayerItem = await PlayerTable
-    .where({ roomID, token })
+    .where({ token })
     .findOne();
 
-  if (!curPlayerItem) {
+  if (!curPlayerItem || !token) {
     return {
       status: 401,
       data: {
@@ -23,22 +21,15 @@ module.exports = async function playerAllStatus({ room, token }) {
   }
 
   // get player info
-  let players = await PlayerTable
-    .where({ roomID })
-    .where('updatedAt')
-    .gt(yesterday)
-    .find();
+  let players = await playersQuery.find();
   players = players.map((it) => ({
     name: it.name,
     status: it.status,
     isSheriff: it.isSheriff,
   }));
+
   // get room info
-  const roomItem = await RoomTable
-    .where({ roomID })
-    .where('updatedAt')
-    .gt(yesterday)
-    .findOne();
+  const roomItem = await roomQuery.findOne();
 
   return {
     status: 200,

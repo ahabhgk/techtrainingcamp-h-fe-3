@@ -1,4 +1,7 @@
-/* eslint-disable no-undef */
+/* eslint-disable no-undef, import/no-unresolved, eqeqeq */
+
+const getRoom = require('./util_getRoom');
+
 module.exports = async function playerStart({ room, name }) {
   if (!room || !name) {
     return {
@@ -7,21 +10,10 @@ module.exports = async function playerStart({ room, name }) {
     };
   }
 
-  // get baseline time
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-
-  // get tables
-  const RoomTable = larkcloud.db.table('rooms');
-  const PlayerTable = larkcloud.db.table('players');
+  const { roomQuery, RoomTable } = await getRoom(room);
 
   // get room info
-  // const { roomID, roles, sheriffNumber } = await RoomTable
-  const roomItem = await RoomTable
-    .where({ roomID: room * 1 })
-    .where('updatedAt')
-    .gt(yesterday)
-    .findOne();
+  const roomItem = await roomQuery.findOne();
 
   // varify room id
   if (!roomItem.roomID) {
@@ -43,7 +35,16 @@ module.exports = async function playerStart({ room, name }) {
   }
 
   // create or get player
+  const PlayerTable = larkcloud.db.table('players');
   let playerItem = await PlayerTable.where({ name }).findOne();
+  if (playerItem.roomID == room) {
+    return {
+      status: 403,
+      data: {
+        msg: 'conflict name',
+      },
+    };
+  }
   if (!playerItem) {
     playerItem = PlayerTable.create({ name, points: 0 });
   }
@@ -63,6 +64,7 @@ module.exports = async function playerStart({ room, name }) {
     isSheriff: false,
   };
   Object.assign(playerItem, playerInfo);
+
   await PlayerTable.save(playerItem);
   await RoomTable.save(roomItem);
 

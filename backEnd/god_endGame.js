@@ -1,16 +1,15 @@
-/* eslint-disable no-undef, no-restricted-syntax */
-module.exports = async function godStart({ room, token, winner }) {
-  const roomID = room * 1;
-  // get baseline time
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
+/* eslint-disable no-undef, import/no-unresolved, no-restricted-syntax */
 
-  const RoomTable = larkcloud.db.table('rooms');
-  const roomItem = await RoomTable
-    .where({ roomID, godToken: token })
+const getRoom = require('./util_getRoom');
+const getPlayers = require('./util_getPlayers');
+
+module.exports = async function godStart({ room, token, winner }) {
+  const { roomQuery, RoomTable } = await getRoom(room);
+  const roomItem = await roomQuery
+    .where({ godToken: token })
     .findOne();
 
-  if (!roomItem) {
+  if (!roomItem || !token) {
     return {
       status: 401,
       data: {
@@ -24,12 +23,8 @@ module.exports = async function godStart({ room, token, winner }) {
   await RoomTable.save(roomItem);
 
   // update players
-  const PlayerTable = larkcloud.db.table('players');
-  const players = await PlayerTable
-    .where({ roomID })
-    .where('updatedAt')
-    .gt(yesterday)
-    .find();
+  const { playersQuery, PlayerTable } = await getPlayers(room);
+  const players = await playersQuery.find();
 
   for (const player of players) {
     if (player.role === 'werewolf' && winner === 'werewolf') {
