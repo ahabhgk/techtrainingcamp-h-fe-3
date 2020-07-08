@@ -25,7 +25,8 @@ const routes = [
     component: GodAdmin,
   },
   {
-    path: '/god/room',
+    name: 'room',
+    path: '/god/room/',
     component: GodRoom,
   },
 ];

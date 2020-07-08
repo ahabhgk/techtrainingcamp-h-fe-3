@@ -1,21 +1,22 @@
 <template>
   <div class="admin">
-    <!-- <numPlayer class="slider"></numPlayer> -->
     <div class="slider">
       <span class="select">游戏人数</span>
-      <span class="number">{{ number.num }}</span>
-      <input type="range" v-model="number.num" id="sinput" min="7" max="15" value="7" step="1"/>
+      <span class="number">{{ number }}</span>
+      <input type="range" v-model="number" id="sinput" min="7" max="15" value="7" step="1"/>
     </div>
-    <numRole class="info" :numPlayer="number.num"></numRole>
+    <numRole class="info" :numPlayer="number"></numRole>
     <div class="button">
         <button class="createRoom" @click="createRoom">创建房间</button>
     </div>
+    <p>{{ info }}</p>
   </div>
 </template>
 
 <script>
 import { ref } from '@vue/composition-api';
 import numRole from 'components/god/NumRole.vue';
+import axios from 'axios';
 import useRouter from '../../utils/use-router';
 
 export default {
@@ -28,15 +29,26 @@ export default {
   },
   setup() {
     const router = useRouter();
-    const pushPath = (url) => {
-      router.push({ path: url });
+    const pushPath = (url, roomNum) => {
+      router.push({ path: url, query: { room: roomNum } });
     };
-    const number = ref({ num: 10 });
+    const number = ref(10);
     const createRoom = () => {
-      pushPath('/god/room');
+      axios
+        .get('https://afbx35.fn.thelarkcloud.com/god_start', {
+          params: {
+            playerNum: number.value,
+          },
+          headers: {},
+        })
+        .then((res) => {
+          const room = ref(res.data.data.room);
+          // console.log(room.value);
+          pushPath('/god/room', String(room.value));
+        })
+        .catch((err) => console.error(err));
     };
     return {
-      pushPath,
       createRoom,
       number,
     };
@@ -98,6 +110,7 @@ export default {
   border-radius: 2px;
   color: white;
   position: relative;
+  font-size: 5px;
 }
 .number::after {
   content: "";
@@ -126,7 +139,7 @@ export default {
   display: inline-block;
   border-radius: 2px;
   font-size: 5px;
-  outline:none
+  outline:none;
 }
 .createRoom:hover {
   background-color: #f76e82;

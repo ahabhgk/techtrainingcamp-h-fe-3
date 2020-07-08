@@ -26,107 +26,7 @@
 </template>
 
 <script>
-const table = [
-  {
-    // num=7
-    acient: 1,
-    wolf: 2,
-    seer: 1,
-    witch: 0,
-    hunter: 0,
-    savior: 0,
-    idiot: 0,
-    villager: 3,
-  },
-  {
-    // num=8
-    acient: 1,
-    wolf: 3,
-    seer: 1,
-    witch: 1,
-    hunter: 0,
-    savior: 0,
-    idiot: 0,
-    villager: 2,
-  },
-  {
-    // num=9
-    acient: 1,
-    wolf: 3,
-    seer: 1,
-    witch: 1,
-    hunter: 0,
-    savior: 0,
-    idiot: 0,
-    villager: 3,
-  },
-  {
-    // num=10
-    acient: 1,
-    wolf: 3,
-    seer: 1,
-    witch: 1,
-    hunter: 1,
-    savior: 0,
-    idiot: 0,
-    villager: 3,
-  },
-  {
-    // num=11
-    acient: 1,
-    wolf: 4,
-    seer: 1,
-    witch: 1,
-    hunter: 1,
-    savior: 1,
-    idiot: 0,
-    villager: 2,
-  },
-  {
-    // num=12
-    acient: 1,
-    wolf: 4,
-    seer: 1,
-    witch: 1,
-    hunter: 1,
-    savior: 1,
-    idiot: 0,
-    villager: 3,
-  },
-  {
-    // num=13
-    acient: 1,
-    wolf: 4,
-    seer: 1,
-    witch: 1,
-    hunter: 1,
-    savior: 1,
-    idiot: 0,
-    villager: 4,
-  },
-  {
-    // num=14
-    acient: 1,
-    wolf: 5,
-    seer: 1,
-    witch: 1,
-    hunter: 1,
-    savior: 1,
-    idiot: 1,
-    villager: 3,
-  },
-  {
-    // num=15
-    acient: 1,
-    wolf: 5,
-    seer: 1,
-    witch: 1,
-    hunter: 1,
-    savior: 1,
-    idiot: 1,
-    villager: 4,
-  },
-];
+import { roleSet } from 'constants';
 
 export default {
   name: 'numRole',
@@ -134,14 +34,14 @@ export default {
     numPlayer: Number,
   },
   setup(props) {
-    const list = table[props.numPlayer - 7];
+    const list = roleSet[props.numPlayer - 7];
     return {
       list,
     };
   },
   computed: {
     list(props) {
-      return table[props.numPlayer - 7];
+      return roleSet[props.numPlayer - 7];
     },
   },
 };
@@ -171,12 +71,15 @@ export default {
     color:#e6e6e6;
   }
   td {
-    color: #b8001c;
-    font-weight: 1000;
+    color: #e00022;
+    font-weight: 800;
+    font-size: 8px;
+    text-shadow: 0.1px 0.1px 0.5px #f87777, 0 0 0.5em #acacff, 0 0 0.1em #ff90e7;
   }
   .td {
+    display:inline-block;
     width: 10px;
-    height: 2px;
+    height: 10px;
     border-radius: 50%;
     padding: 2px;
     background-color: #e6e6e6;
