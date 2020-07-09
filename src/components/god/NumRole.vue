@@ -12,7 +12,7 @@
         <th>白痴</th>
     </tr>
     <tr>
-        <td><span class="td">{{ list.acient }}</span></td>
+        <td><span class="td0">{{ list.god }}</span></td>
         <td><span class="td">{{ list.wolf }}</span></td>
         <td><span class="td">{{ list.villager }}</span></td>
         <td><span class="td">{{ list.seer }}</span></td>
@@ -76,12 +76,18 @@ export default {
     font-size: 8px;
     text-shadow: 0.1px 0.1px 0.5px #f87777, 0 0 0.5em #acacff, 0 0 0.1em #ff90e7;
   }
-  .td {
+  .td,.td0{
     display:inline-block;
     width: 10px;
     height: 10px;
     border-radius: 50%;
     padding: 2px;
     background-color: #e6e6e6;
+  }
+  .td0 {
+    color: #0011ff;
+    font-weight: 800;
+    font-size: 8px;
+    text-shadow: 0.1px 0.1px 0.5px #77f0f8, 0 0 0.5em #acacff, 0 0 0.1em #ff90e7;
   }
 </style>
