@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-Vue.use(VueRouter);
-
 const Home = () => import('views/Home');
 const GodGame = () => import('views/god/Game');
+const Index = () => import('views/player/Index');
+
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -18,6 +19,10 @@ const routes = [
   {
     path: '/god/game',
     component: GodGame,
+  },
+  {
+    path: '/player/index',
+    component: Index,
   },
 ];
 
