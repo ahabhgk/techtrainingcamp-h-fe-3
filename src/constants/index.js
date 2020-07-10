@@ -9,6 +9,7 @@ export const roleType = {
   WEWEWOLF: 'werewolf',
   WITCH: 'witch',
 };
+export const roleActions = ['cured', 'poisoned', 'killed', 'voted'];
 export const roleSet = [
   {
     // num=7
@@ -113,4 +114,5 @@ export const roleSet = [
 export default {
   roleType,
   roleSet,
+  roleActions,
 };
