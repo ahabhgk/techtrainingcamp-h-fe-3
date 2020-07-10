@@ -1,27 +1,34 @@
 <template>
   <div class="player-index">
     <div class="title">
-      <img src="../../assets/images/icon/sun1.png" alt="" width="35px">
-      <span>第一天，白天</span>
+      <img v-if="timeSelection()" src="../../assets/images/icon/moon.png" width="35px">
+      <img v-else src="../../assets/images/icon/sun1.png" width="35px">
+      <span>第{{state.allStatus.data.day}}天，
+        {{state.timeInfo[state.allStatus.data.time]}}
+      </span>
     </div>
     <div class="list-wrapper">
       <PlayerShow
-        v-for="player in state.players"
+        v-for="player in state.allStatus.data.players"
         :key="player.name"
         :name="player.name"
-        :statusList="player.status"
+        :status="player.status"
+        :isSheriff="player.isSheriff"
       />
     </div>
     <div class="selfInfo">
       <div>
         <img src="../../assets/images/player/acient.jpg" alt="" width="70">
-        <p>{{state.name}}</p>
+        <p>{{state.allStatus.data.self.name}}</p>
       </div>
       <div>
         <ul>
-          <li>身份：预言家</li>
+          <li>身份：{{roleName[state.allStatus.data.self.role]}}</li>
           <li>状态：被杀</li>
-          <li>是否为警长：否</li>
+          <li>是否为警长：
+            <span v-if="state.allStatus.data.self.isSheriff">是</span>
+            <span v-else>否</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -41,13 +48,13 @@
 <script>
 import { reactive } from '@vue/composition-api';
 import { getStatus } from 'network/player';
+import { roleName } from 'constants/index.js';
 import PlayerShow from 'components/player/PlayerShow.vue';
-// import { roleType } from 'constants';
 import iconCheck from 'assets/images/icon/check1.png';
 import iconRefresh from 'assets/images/icon/refresh.png';
 
 export default {
-  name: 'Game',
+  name: '',
   components: {
     PlayerShow,
   },
@@ -56,20 +63,29 @@ export default {
     };
   },
   setup() {
+    // initial state
     const state = reactive({
-      players: [
-        { name: 'bkk', status: ['voted', 'killed', 'sheriff'] },
-        { name: 'yiMing', status: ['voted', 'killed', 'sheriff'] },
-        { name: 'xxx', status: ['voted', 'killed', 'sheriff'] },
-        { name: 'cww', status: ['voted', 'killed', 'sheriff'] },
-        { name: 'nddd', status: ['voted', 'killed', 'sheriff'] },
-        { name: 'bzzb', status: ['voted', 'killed', 'sheriff'] },
-        { name: 'jackMa', status: ['voted', 'killed', 'sheriff'] },
-        { name: 'teacherMa', status: ['voted', 'killed', 'sheriff'] },
-      ],
-      name: 'xxx',
-      slefstatus: ['voted', 'killed', 'sheriff'],
-      param: { room_id: 121899, token: 'e53b2hp0unk' },
+      allStatus: {
+        state: 200,
+        data: {
+          players: [
+            { name: 'aaa', status: 'alive', isSheriff: true },
+            { name: 'bbb', status: 'voted', isSheriff: false },
+            { name: 'ccc', status: 'alive', isSheriff: false },
+            { name: 'ddd', status: 'killed', isSheriff: false },
+            { name: 'eee', status: 'alive', isSheriff: false },
+            { name: 'fff', status: 'alive', isSheriff: false },
+            { name: 'ggg', status: 'alive', isSheriff: false },
+          ],
+          self: {
+            name: 'ccc', status: 'alive', isSheriff: false, role: 'villager',
+          },
+          time: 'daylight',
+          day: 1,
+        },
+      },
+      param: { room_id: 226189, token: 'geaqctb8hxs' },
+      timeInfo: { night: '夜晚', daylight: '白天' },
     });
 
     function getResult() {
@@ -77,7 +93,11 @@ export default {
     }
     function getInfo() {
       getStatus(state.param).then((res) => console.log(res)).catch((err) => console.log(err));
-      console.log(state.name);
+      console.log(state.allStatus.data.players);
+      console.log(state.allStatus.data.time === 'daylight');
+    }
+    function timeSelection() {
+      return state.allStatus.data.time === 'night';
     }
     return {
       state,
@@ -85,6 +105,8 @@ export default {
       getStatus,
       getResult,
       getInfo,
+      timeSelection,
+      roleName,
     };
   },
 };
@@ -134,7 +156,8 @@ export default {
     ul {
       margin: 0;
       li {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
+        margin-top: 7px;
       }
     }
   }

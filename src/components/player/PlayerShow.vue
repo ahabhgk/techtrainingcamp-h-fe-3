@@ -6,15 +6,19 @@
         <div class="name">{{name}}</div>
       </div>
     </div>
-    <div class="control-wrapper">
+    <div class="wrapper">
       <div
         class="status"
-        v-for="status of statusList"
-        :key="status"
+        v-for="(statusName,key) of statusMap"
+        :key="statusName"
       >
-        <img class="icon" :src="status === 'sheriff'?icon.sheriff:icon.skull"
+        <img class="icon" :src="icon[key]"
         />
-        <span>{{ statusMap[status] }}</span>
+        <span
+          :class="{curSheriff:isSheriff && key === 'isSheriff',
+          curStatus:status === key}">
+          {{ statusName }}
+        </span>
       </div>
     </div>
   </div>
@@ -23,62 +27,24 @@
 <script>
 // import {} from '@vue/composition-api';
 import useRouter from 'utils/use-router';
-// import { roleType } from 'constants';
 import iconSkull from 'assets/images/icon/skull.png';
 import iconSheriff from 'assets/images/icon/sheriff.png';
+import iconAlive from 'assets/images/icon/alive.png';
+import iconVoted from 'assets/images/icon/voted.png';
 import avatarDefault from 'assets/images/player/default.jpg';
+// import { computed } from '@vue/composition-api';
 
 const icon = {
-  skull: iconSkull,
-  sheriff: iconSheriff,
+  alive: iconAlive,
+  killed: iconSkull,
+  voted: iconVoted,
+  isSheriff: iconSheriff,
 };
-// const player = {
-//   [roleType.ACIENT]: {
-//     avatar: avatarAcient,
-//     role: '祖先',
-//   },
-//   [roleType.HUNTER]: {
-//     avatar: avatarHunter,
-//     role: '猎人',
-//   },
-//   [roleType.IDIOT]: {
-//     avatar: avatarIdiot,
-//     role: '愚人',
-//   },
-//   [roleType.SAVIOR]: {
-//     avatar: avatarSavior,
-//     role: '救助者',
-//   },
-//   [roleType.SEER]: {
-//     avatar: avatarSeer,
-//     role: '预言家',
-//   },
-//   [roleType.SHERIFF]: {
-//     avatar: avatarSheriff,
-//     role: '警长',
-//   },
-//   [roleType.VILLAGER]: {
-//     avatar: avatarVillager,
-//     role: '村民',
-//   },
-//   [roleType.WEREWOLF]: {
-//     avatar: avatarWerewolf,
-//     role: '狼人',
-//   },
-//   [roleType.WITCH]: {
-//     avatar: avatarWitch,
-//     role: '女巫',
-//   },
-//   [roleType.Defualt]: {
-//     avatar: avatarDefault,
-//     role: '祖先',
-//   },
-// };
 
 const statusMap = {
-  sheriff: '警长',
+  isSheriff: '警长',
   killed: '被杀',
-  shot: '猎枪',
+  alive: '存活',
   voted: '踢出',
 };
 
@@ -91,7 +57,8 @@ export default {
   name: 'PlayerShow',
   props: {
     name: String,
-    statusList: Array,
+    status: String,
+    isSheriff: Boolean,
   },
   data() {
     return {
@@ -121,7 +88,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #494c9c;
+  background-color: #202153;
   &:first-child {
     border-top: none;
   }
@@ -144,8 +111,11 @@ export default {
   }
 }
 
-.control-wrapper {
+.wrapper {
   display: flex;
+  .curStatus {
+    color: red;
+  }
   .status {
     display: flex;
     flex-direction: column;
@@ -158,14 +128,21 @@ export default {
     outline: none;
     @include btn-ripple;
   }
-  .status > span {
-    color: #ffffff;
-    font-size: 12px;
-  }
   .icon {
     width: 20px;
     height: 20px;
+    margin-top: 4px;
   }
 }
 
+span {
+  color: #ffffff;
+  font-size: 12px;
+}
+span .curStatus {
+  color: red;
+}
+.curSheriff {
+  color: red;
+}
 </style>
