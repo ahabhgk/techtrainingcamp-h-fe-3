@@ -3,13 +3,12 @@
     <div class="slider">
       <span class="select">游戏人数</span>
       <span class="number">{{ number }}</span>
-      <input type="range" v-model="number" id="sinput" min="7" max="9" value="7" step="1"/>
+      <input type="range" v-model.number="number" id="sinput" min="7" max="9" step="1"/>
     </div>
     <numRole class="info" :numPlayer="number"></numRole>
     <div class="button">
-        <button class="createRoom" @click="createRoom">创建房间</button>
+      <button class="createRoom" @click="createRoom">创建房间</button>
     </div>
-    <p>{{ info }}</p>
   </div>
 </template>
 
