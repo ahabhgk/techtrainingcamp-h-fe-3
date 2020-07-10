@@ -7,6 +7,7 @@ const Home = () => import('views/Home');
 const GodGame = () => import('views/god/Game');
 const GodAdmin = () => import('views/god/Admin');
 const GodRoom = () => import('views/god/Room');
+const Topplayers = () => import('views/TopPlayers');
 const routes = [
   {
     path: '',
@@ -28,6 +29,10 @@ const routes = [
     name: 'room',
     path: '/god/room/',
     component: GodRoom,
+  },
+  {
+    path: '/topPlayers',
+    component: Topplayers,
   },
 ];
 
