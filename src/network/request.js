@@ -1,21 +1,18 @@
 import axios from 'axios';
 
-const instance = axios.create({
-  baseURL: 'http://foo.bar.baz/',
+const request = axios.create({
+  baseURL: 'https://afbx35.fn.thelarkcloud.com',
   timeout: 5000,
 });
 
-instance.interceptors.request.use(
+request.interceptors.request.use(
   (config) => config,
   (err) => { throw err; },
 );
 
-instance.interceptors.response.use(
+request.interceptors.response.use(
   (response) => response.data,
   (err) => { throw err; },
 );
 
-export default function request(config) {
-  // return a Promise
-  return instance(config);
-}
+export default request;

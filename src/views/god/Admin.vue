@@ -29,8 +29,9 @@ export default {
   },
   setup() {
     const router = useRouter();
-    const pushPath = (url, roomNum) => {
-      router.push({ path: url, query: { room: roomNum } });
+    const pushPath = (url, data) => {
+      console.log(router);
+      router.push({ path: url, query: data });
     };
     const number = ref(7);
     const createRoom = () => {
@@ -42,9 +43,8 @@ export default {
           headers: {},
         })
         .then((res) => {
-          const room = ref(res.data.data.room);
-          // console.log(room.value);
-          pushPath('/god/room', String(room.value));
+          const { data } = res.data;
+          pushPath('/god/room', data);
         })
         .catch((err) => console.error(err));
     };

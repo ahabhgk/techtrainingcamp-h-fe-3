@@ -4,12 +4,12 @@
   <div class="table">
     <table>
       <tr>
-          <td id="td1">{{ $route.query.room[0] }}</td>
-          <td id="td2">{{ $route.query.room[1] }}</td>
-          <td id="td3">{{ $route.query.room[2] }}</td>
-          <td id="td4">{{ $route.query.room[3] }}</td>
-          <td id="td5">{{ $route.query.room[4] }}</td>
-          <td id="td6">{{ $route.query.room[5] }}</td>
+          <td id="td1">{{ room[0] }}</td>
+          <td id="td2">{{ room[1] }}</td>
+          <td id="td3">{{ room[2] }}</td>
+          <td id="td4">{{ room[3] }}</td>
+          <td id="td5">{{ room[4] }}</td>
+          <td id="td6">{{ room[5] }}</td>
       </tr>
     </table>
     <button class="enterRoom" @click="godGame"></button>
@@ -25,16 +25,17 @@ export default {
   components: {},
   setup() {
     const router = useRouter();
-    // console.log();
-    const pushPath = (url) => {
-      router.push({ path: url });
+    const { query } = router.currentRoute;
+    const pushPath = (url, query) => {
+      router.push({ path: url, query });
     };
     const godGame = () => {
-      pushPath('/god/game');
+      pushPath('/god/game', query);
     };
     return {
       pushPath,
       godGame,
+      room: query.room.toString(),
     };
   },
 };
