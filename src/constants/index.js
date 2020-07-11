@@ -11,7 +11,6 @@ export const roleType = {
 };
 
 export const roleName = {
-  acient: '老者',
   hunter: '猎人',
   idiot: '愚人',
   savior: '救世主',

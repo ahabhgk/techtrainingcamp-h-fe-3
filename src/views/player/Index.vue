@@ -1,8 +1,8 @@
 <template>
   <div class="player-index">
     <div class="title">
-      <img v-if="timeSelection()" src="../../assets/images/icon/moon.png" width="35px">
-      <img v-else src="../../assets/images/icon/sun1.png" width="35px">
+      <img v-if="timeSelection()" src="@/assets/images/icon/moon.png" width="35px">
+      <img v-else src="@/assets/images/icon/sun.png" width="35px">
       <span>第{{state.allStatus.data.day}}天，
         {{state.timeInfo[state.allStatus.data.time]}}
       </span>
@@ -18,7 +18,7 @@
     </div>
     <div class="selfInfo">
       <div>
-        <img src="../../assets/images/player/acient.jpg" alt="" width="70">
+        <img :src="imgList[state.allStatus.data.self.role]" alt="" width="70">
         <p>{{state.allStatus.data.self.name}}</p>
       </div>
       <div>
@@ -53,6 +53,15 @@ import PlayerShow from 'components/player/PlayerShow.vue';
 import iconCheck from 'assets/images/icon/check1.png';
 import iconRefresh from 'assets/images/icon/refresh.png';
 
+const imgList = {
+  hunter: require('@/assets/images/player/hunter.jpg'),
+  villager: require('@/assets/images/player/villager.jpg'),
+  idiot: require('@/assets/images/player/idiot.jpg'),
+  savior: require('@/assets/images/player/savior.jpg'),
+  seer: require('@/assets/images/player/seer.jpg'),
+  werewolf: require('@/assets/images/player/werewolf.jpg'),
+  witch: require('@/assets/images/player/witch.jpg'),
+};
 export default {
   name: '',
   components: {
@@ -78,7 +87,7 @@ export default {
             { name: 'ggg', status: 'alive', isSheriff: false },
           ],
           self: {
-            name: 'ccc', status: 'alive', isSheriff: false, role: 'villager',
+            name: 'ccc', status: 'alive', isSheriff: false, role: 'witch',
           },
           time: 'daylight',
           day: 1,
@@ -87,7 +96,6 @@ export default {
       param: { room_id: 226189, token: 'geaqctb8hxs' },
       timeInfo: { night: '夜晚', daylight: '白天' },
     });
-
     function getResult() {
       this.$router.push('/result');
     }
@@ -95,6 +103,7 @@ export default {
       getStatus(state.param).then((res) => console.log(res)).catch((err) => console.log(err));
       console.log(state.allStatus.data.players);
       console.log(state.allStatus.data.time === 'daylight');
+      console.log(`@/assets/images/player/${state.allStatus.data.self.role}.jpg`);
     }
     function timeSelection() {
       return state.allStatus.data.time === 'night';
@@ -107,6 +116,7 @@ export default {
       getInfo,
       timeSelection,
       roleName,
+      imgList,
     };
   },
 };
@@ -114,7 +124,6 @@ export default {
 
 <style scoped lang="scss">
 @import "../../assets/styles/utils.scss";
-
 .player-index {
   font-family: 'Arial','Microsoft YaHei','黑体','宋体',sans-serif;
   position: relative;

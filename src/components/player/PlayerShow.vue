@@ -48,11 +48,6 @@ const statusMap = {
   voted: '踢出',
 };
 
-// const selectStatusSet = new Set([
-//   'cured',
-//   'protected',
-// ]);
-
 export default {
   name: 'PlayerShow',
   props: {
