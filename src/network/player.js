@@ -19,3 +19,12 @@ export function usePower(param, someData) {
     },
   });
 }
+
+export function login(param, someData) {
+  // 玩家登录
+  return request({
+    url: `player/start?${param}`,
+    data: someData,
+    method: 'get',
+  });
+}

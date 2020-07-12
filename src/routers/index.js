@@ -5,6 +5,8 @@ Vue.use(VueRouter);
 
 const Home = () => import('views/Home');
 const GodGame = () => import('views/god/Game');
+const Login = () => import('views/player/Login');
+const Result = () => import('views/Result');
 
 const routes = [
   {
@@ -18,6 +20,13 @@ const routes = [
   {
     path: '/god/game',
     component: GodGame,
+  },
+  {
+    path: '/player/login',
+    component: Login,
+  }, {
+    path: '/result',
+    component: Result,
   },
 ];
 
