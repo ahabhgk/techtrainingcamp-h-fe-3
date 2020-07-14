@@ -1,7 +1,9 @@
 <template>
   <div class="admin">
+    <div class="title">
+    <span class="select">游戏人数</span>
+    </div>
     <div class="slider">
-      <span class="select">游戏人数</span>
       <span class="number">{{ number }}</span>
       <input type="range" v-model="number" id="sinput" min="7" max="9" value="7" step="1"/>
     </div>
@@ -58,41 +60,45 @@ export default {
 <style scoped lang="scss">
 @import "../../assets/styles/utils.scss";
 
-* {
-  margin: 0;
-  padding: 0;
+.admin {
+  position: relative;
+  min-height: 100vh;
+  background-image: linear-gradient(#192033, #0f1225);
   box-sizing: border-box;
-  background-color: #1e272e;
+}
+.title {
+  padding-top: 15vh;
+  padding-bottom: 5vh;
+  text-align: center;
+}
+.select {
+  color: white;
+  background-color: #3c40c6;
+  padding: 10px 20px;
+  border-radius: 2px;
+  font-size: 20px;
+  font-weight: 500;
 }
 .slider {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  margin-bottom: 15vh;
   background-color: transparent;
-}
-.select {
-  color: white;
-  background-color: #3c40c6;
-  padding: 5px 10px;
-  border-radius: 2px;
-  font-size: 5px;
-  font-weight: 500;
-  margin-right: 10px;
 }
 #sinput {
   -webkit-appearance: none;
   background: linear-gradient(75deg, #3c40c6, #575fcf);
   border-radius: 4px;
-  width: 20%;
-  height: 3px;
+  width: 40%;
+  height: 5px;
   outline: none;
   box-shadow: 0 0 6px rgb(28, 32, 148);
 }
 #sinput::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 5px;
-  height: 5px;
+  width: 15px;
+  height: 15px;
   background: #f53b57;
   border-radius: 50%;
   transition: 0.3s;
@@ -102,43 +108,43 @@ export default {
   box-shadow: 0 0 0 6px rgba(155, 73, 146, 0.4);
 }
 .number {
-  margin-right: 10px;
+  margin-right: 20px;
   background-color: #f53b57;
-  width: 15px;
-  line-height: 10px;
+  width: 30px;
+  line-height: 30px;
   text-align: center;
-  border-radius: 2px;
+  border-radius: 3px;
   color: white;
   position: relative;
-  font-size: 5px;
+  font-size: 20px;
 }
 .number::after {
   content: "";
   display: block;
-  border-top: 2px solid transparent;
-  border-bottom: 2px solid transparent;
-  border-left: 2px solid #f53b57;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #f53b57;
   position: absolute;
-  top: calc(50% - 2px);
-  right: -2px;
+  top: calc(50% - 5px);
+  right: -4px;
 }
 .button {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  height: 40vh;
   background-color: transparent;
 }
 .createRoom {
   background-color: #f53b57; /* Green */
   border: none;
   color: white;
-  padding: 5px 10px;
+  padding: 10px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  border-radius: 2px;
-  font-size: 5px;
+  border-radius: 3px;
+  font-size: 20px;
   outline:none;
 }
 .createRoom:hover {
