@@ -26,10 +26,12 @@ const routes = [
   {
     path: '/player/login',
     component: Login,
-  }, {
+  },
+  {
     path: '/result',
     component: Result,
-  }, {
+  },
+  {
     path: '/god/admin',
     component: GodAdmin,
   },
