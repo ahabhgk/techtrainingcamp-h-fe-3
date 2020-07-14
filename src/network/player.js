@@ -20,11 +20,5 @@ export function usePower(param, someData) {
   });
 }
 
-export function login(param, someData) {
-  // 玩家登录
-  return request({
-    url: `player/start?${param}`,
-    data: someData,
-    method: 'get',
-  });
-}
+export const login = (room, name) => request.get(`/player_start?room=${room}&name=${name}`);
+export const getResult = (room) => request.get(`/game_allAtatus??room=${room}`);
