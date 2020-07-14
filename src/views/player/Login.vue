@@ -12,8 +12,8 @@
         <button class="rule" @click="handleShowRule()">玩法说明</button>
         <button class="login" @click="handleLogin()">登录</button>
       </div>
+      <div class="alert"  v-if="state.alertIsShow">信息填写不完成，请完善后尝试</div>
     </div>
-
     <div class="rule-box" v-if="state.ruleIsShow">
       <div class="title">游戏玩法</div>
       <div class="rule-container">
@@ -28,9 +28,9 @@
       <div class="rule-cancel" @click="handleShowRuleCancel">关闭</div>
     </div>
 
-    <div class="tip-box" v-if="state.tipIsShow">
-      <div class="tip-content">你的身份是：{{state.role}}</div>
-      <div class="tip-cancel" @click="handleGameStart">开始游戏</div>
+    <div class="tip-box"  v-if="state.tipIsShow">
+      <div class="tip-content">你的身份是：{{state.role || '接口请求有误'}}</div>
+      <div class="tip-start" @click="handleGameStart">开始游戏</div>
     </div>
   </div>
 </template>
@@ -51,8 +51,13 @@ export default {
       token: '',
       tipIsShow: false,
       ruleIsShow: false,
+      alertIsShow: false,
     });
-    const { currentRoute } = useRouter();
+    const router = useRouter();
+    const { currentRoute } = router;
+    const pushPath = (url, data) => {
+      router.push({ path: url, query: data });
+    };
 
     const getRoomId = () => {
       if (currentRoute.query.room) {
@@ -65,12 +70,19 @@ export default {
     });
 
     const handleLogin = async () => {
-      const { status, data } = await playerApi.login(state.number, state.name);
-      console.log(data);
-      if (status === 200) {
-        state.tipIsShow = true;
-        state.token = data.token;
-        state.role = data.role;
+      if (state.number !== '' && state.name !== '') {
+        const { status, data } = await playerApi.login(state.number, state.name);
+        console.log(data);
+        if (status === 200) {
+          state.token = data.token;
+          state.role = data.role;
+          state.tipIsShow = true;
+        }
+      } else {
+        state.alertIsShow = true;
+        setTimeout(() => {
+          state.alertIsShow = false;
+        }, 1500);
       }
     };
 
@@ -83,6 +95,8 @@ export default {
     };
 
     const handleGameStart = () => {
+      pushPath('/player', { token: state.token, room: state.number });
+      state.tipIsShow = false;
     };
 
     return {
@@ -128,16 +142,16 @@ export default {
        justify-content:flex-end;
        margin-top: 30px;
        font-size: 1.2rem;
-            input {
-       outline:0;
-       border:0;
-       width: 150px;
-       height: 30px;
-       line-height: 30px;
-       border-radius: 15px;
-       padding-left: 10px;
-       margin-left: 6px;
-     }
+      input {
+        outline:0;
+        border:0;
+        width: 150px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 15px;
+        padding-left: 10px;
+        margin-left: 6px;
+      }
      }
   }
 
@@ -168,6 +182,12 @@ export default {
   .rule {
     background: lightseagreen;
   }
+  .alert {
+    color: red;
+    margin-top: 15px;
+    font-weight: bold;
+    letter-spacing:.2em;
+  }
 
   .rule-box {
     position:absolute;
@@ -191,18 +211,50 @@ export default {
       height: calc(70vh - 50px);
     }
     .rule-cancel {
-    background: grey;
-    position: absolute;
-    bottom: 0;
-    height: 50px;
-    width: 80vw;
-    line-height: 50px;
-    text-align: center;
-    font-size:1.3rem;
-    font-weight: bold;
-    background:red;
-    color: white;
+      position: absolute;
+      bottom: 0;
+      height: 50px;
+      width: 80vw;
+      line-height: 50px;
+      text-align: center;
+      font-size:1.3rem;
+      font-weight: bold;
+      background:red;
+      color: white;
+    }
   }
+
+  .tip-box{
+    position:absolute;
+    background: ghostwhite;
+    border: 6px solid black;
+    border-radius: 15px;
+    box-shadow: 4rpx 4rpx 22rpx rgba(0, 0, 0, 0.3);
+    height: 20vh;
+    width: 80vw;
+    top: 50%;
+    left: 50%;
+    padding-bottom: 50px;
+    transform: translate(-50%,-50%);
+    .tip-content {
+      padding: 10px 6px;
+      font-size: 1.2rem;
+      overflow: scroll;
+      height: calc(20vh - 50px);
+    }
+
+    .tip-start {
+      position: absolute;
+      bottom: 0;
+      height: 50px;
+      width: 80vw;
+      line-height: 50px;
+      text-align: center;
+      font-size:1.3rem;
+      font-weight: bold;
+      background:green;
+      color: white;
+    }
   }
 }
 </style>
