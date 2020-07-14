@@ -9,7 +9,7 @@
 
 ---
 
-`GET /player/start?room=<room id>&name=<user name>`
+`GET https://afbx35.fn.thelarkcloud.com/player_start?room=<room id>&name=<user name>`
 
 玩家设置名字, 加入特定房间号
 
@@ -31,11 +31,19 @@
     "msg": "error mesage"
   }
 }
+
+// 如果名字重复
+{
+  "status": 403,
+  "data": {
+    "msg": "conflict name"
+  }
+}
 ```
 
 ---
 
-`GET /player/allStatus?room=<room id>&token=<token>`
+`GET https://afbx35.fn.thelarkcloud.com/player_allStatus?room=<room id>&token=<token>`
 
 玩家获得当前游戏状态
 
@@ -55,18 +63,29 @@
         // ...
       }
     ],
-    "self": { //自己的角色
+    "self": {
+      "name": "<玩家名字>",
+      "status" : "dead|alive",
+      "isSheriff": true|false,
       "role": "wereWolf|villager|..."
     },
     "time": "day|night|gameOver",
     "day": <第几天>(数字类型)
   }
 }
+
+// 如果token不对
+{
+  "status": 401,
+  "data": {
+    "msg": "wrong token"
+  }
+}
 ```
 
 ## god
 
-`GET /god/start?playerNum=<>`
+`GET https://afbx35.fn.thelarkcloud.com/god_start?playerNum=<>`
 
 上帝创建房间, 并设置房间人数
 
@@ -85,7 +104,7 @@
 
 ---
 
-`GET /god/endGame?room=<room id>&token=<token>&winner=<werewolf|villager|nobody>`
+`GET https://afbx35.fn.thelarkcloud.com/god_endGame?room=<room id>&token=<token>&winner=<werewolf|villager|nobody>`
 
 提前结束游戏, 并设置胜者
 
@@ -102,7 +121,7 @@
 
 ---
 
-`GET /god/setStatus?name=<player name>&status=<status>&room=<room id>&token=<token>`
+`GET https://afbx35.fn.thelarkcloud.com/god_setStatus?name=<player name>&status=<status>&room=<room id>&token=<token>`
 
 上帝设置玩家玩家状态(死了?成为警长?被守卫保了?...)
 
@@ -121,7 +140,7 @@
 
 ---
 
-`GET /god/allStatus?room=<room id>&token=<token>`
+`GET https://afbx35.fn.thelarkcloud.com/god_allStatus?room=<room id>&token=<token>`
 
 上帝获得角色信息
 
@@ -136,6 +155,7 @@
         "name": "<玩家名字>",
         "status" : "dead|alive",
         "role": "seer|werewolf|...",
+        "isSheriff: true|false,
         "killedBy": "werewolf|vote|hunter|witch",
         "killedAt": "<第几天>(数字类型, -1代表没死)",
       },
@@ -150,7 +170,7 @@
 ```
 ## other
 
-`GET /game/result?room=<room id>`
+`GET https://afbx35.fn.thelarkcloud.com/game_allAtatus?room=<room id>`
 
 根据房间号获取游戏结果
 
@@ -176,9 +196,17 @@
     ],
   }
 }
+
+// 如果游戏还未结束
+{
+  "status": 400,
+  "data": {
+    "msg": "game is still ongoing"
+  }
+}
 ```
 
-`GET /game/topPlayers`
+`GET https://afbx35.fn.thelarkcloud.com/game_topPlayers`
 
 获取积分榜
 

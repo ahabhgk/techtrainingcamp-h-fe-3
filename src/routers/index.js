@@ -7,6 +7,8 @@ const Home = () => import('views/Home');
 const GodGame = () => import('views/god/Game');
 const Login = () => import('views/player/Login');
 const Result = () => import('views/Result');
+const GodAdmin = () => import('views/god/Admin');
+const GodRoom = () => import('views/god/Room');
 
 const routes = [
   {
@@ -27,6 +29,14 @@ const routes = [
   }, {
     path: '/result',
     component: Result,
+  }, {
+    path: '/god/admin',
+    component: GodAdmin,
+  },
+  {
+    name: 'room',
+    path: '/god/room/',
+    component: GodRoom,
   },
 ];
 
