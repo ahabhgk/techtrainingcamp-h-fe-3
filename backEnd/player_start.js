@@ -37,6 +37,9 @@ module.exports = async function playerStart({ room, name }) {
   // create or get player
   const PlayerTable = larkcloud.db.table('players');
   let playerItem = await PlayerTable.where({ name }).findOne();
+  if (!playerItem) {
+    playerItem = PlayerTable.create({ name, points: 0 });
+  }
   if (playerItem.roomID == room) {
     return {
       status: 403,
@@ -45,13 +48,12 @@ module.exports = async function playerStart({ room, name }) {
       },
     };
   }
-  if (!playerItem) {
-    playerItem = PlayerTable.create({ name, points: 0 });
-  }
 
   // init player
   const token = (Math.random() * 1e17).toString(36);
-  const roleInd = Math.floor(Math.random() * roomItem.roles.length);
+  const roleInd = Math.floor(
+    Math.random() * roomItem.roles.length,
+  );
   const role = roomItem.roles.splice(roleInd, 1)[0];
 
   const playerInfo = {
