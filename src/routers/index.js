@@ -3,6 +3,8 @@ import VueRouter from 'vue-router';
 
 const Home = () => import('views/Home');
 const GodGame = () => import('views/god/Game');
+const Login = () => import('views/player/Login');
+const Result = () => import('views/Result');
 const GodAdmin = () => import('views/god/Admin');
 const GodRoom = () => import('views/god/Room');
 const Topplayers = () => import('views/TopPlayers');
@@ -22,6 +24,14 @@ const routes = [
   {
     path: '/god/game',
     component: GodGame,
+  },
+  {
+    path: '/player/login',
+    component: Login,
+  },
+  {
+    path: '/result',
+    component: Result,
   },
   {
     path: '/god/admin',

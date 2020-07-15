@@ -28,3 +28,6 @@ export function usePower(param, someData) {
     },
   });
 }
+
+export const login = (room, name) => request.get(`/player_start?room=${room}&name=${name}`);
+export const getResult = (room) => request.get(`/game_allAtatus??room=${room}`);
