@@ -28,8 +28,8 @@
       <div class="rule-cancel" @click="handleShowRuleCancel">关闭</div>
     </div>
 
-    <div class="tip-box"  v-if="state.tipIsShow">
-      <div class="tip-content">你的身份是：{{state.role || '接口请求有误'}}</div>
+    <div class="tip-box" v-if="state.tipIsShow">
+      <div class="tip-content">你的身份是：{{state.role || '未知错误'}}</div>
       <div class="tip-start" @click="handleGameStart">开始游戏</div>
     </div>
   </div>
@@ -230,10 +230,12 @@ export default {
     border: 6px solid black;
     border-radius: 15px;
     box-shadow: 4rpx 4rpx 22rpx rgba(0, 0, 0, 0.3);
-    height: 20vh;
+    height: 10vh;
     width: 80vw;
     top: 50%;
     left: 50%;
+    text-align: center;
+    padding-top: 10px;
     padding-bottom: 50px;
     transform: translate(-50%,-50%);
     .tip-content {
@@ -252,7 +254,7 @@ export default {
       text-align: center;
       font-size:1.3rem;
       font-weight: bold;
-      background:green;
+      background:lightcoral;
       color: white;
     }
   }
