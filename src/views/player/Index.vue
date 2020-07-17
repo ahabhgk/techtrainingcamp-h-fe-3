@@ -24,7 +24,7 @@
       <div>
         <ul>
           <li>身份：{{roleName[state.allStatus.data.self.role]}}</li>
-          <li>状态：被杀</li>
+          <li>状态：{{stateName[state.allStatus.data.self.status]}}</li>
           <li>是否为警长：
             <span v-if="state.allStatus.data.self.isSheriff">是</span>
             <span v-else>否</span>
@@ -46,9 +46,10 @@
 </template>
 
 <script>
-import { reactive } from '@vue/composition-api';
+import { reactive, onMounted } from '@vue/composition-api';
 import { getStatus } from 'network/player';
 import { roleName } from 'constants/index.js';
+import useRouter from 'utils/use-router';
 import PlayerShow from 'components/player/PlayerShow.vue';
 import iconCheck from 'assets/images/icon/check1.png';
 import iconRefresh from 'assets/images/icon/refresh.png';
@@ -69,6 +70,12 @@ const imgList = {
   werewolf: imgWerewolf,
   witch: imgWitch,
 };
+const stateName = {
+  voted: '踢出',
+  killed: '死亡',
+  alive: '存活',
+};
+
 export default {
   name: '',
   components: {
@@ -80,6 +87,7 @@ export default {
   },
   setup() {
     // initial state
+    const router = useRouter();
     const state = reactive({
       allStatus: {
         state: 200,
@@ -100,21 +108,32 @@ export default {
           day: 1,
         },
       },
-      param: { room_id: 226189, token: 'geaqctb8hxs' },
+      param: {},
       timeInfo: { night: '夜晚', daylight: '白天' },
     });
+
+    function getInfo() {
+      getStatus(state.param)
+        .then((res) => { state.allStatus = res; })
+        .catch((err) => console.log(err));
+      // console.log(router.currentRoute);
+    }
+
+    onMounted(() => {
+      // getInfo();
+      const { query } = router.currentRoute;
+      state.param = query;
+      getInfo();
+    });
+
     function getResult() {
       this.$router.push('/result');
     }
-    function getInfo() {
-      getStatus(state.param).then((res) => console.log(res)).catch((err) => console.log(err));
-      console.log(state.allStatus.data.players);
-      console.log(state.allStatus.data.time === 'daylight');
-      console.log(`@/assets/images/player/${state.allStatus.data.self.role}.jpg`);
-    }
+
     function timeSelection() {
       return state.allStatus.data.time === 'night';
     }
+
     return {
       state,
       icon: { check: iconCheck, refresh: iconRefresh },
@@ -124,6 +143,7 @@ export default {
       timeSelection,
       roleName,
       imgList,
+      stateName,
     };
   },
 };

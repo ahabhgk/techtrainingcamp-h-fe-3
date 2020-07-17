@@ -30,22 +30,19 @@ import useRouter from 'utils/use-router';
 import iconSkull from 'assets/images/icon/skull.png';
 import iconSheriff from 'assets/images/icon/sheriff.png';
 import iconAlive from 'assets/images/icon/alive.png';
-import iconVoted from 'assets/images/icon/voted.png';
 import avatarDefault from 'assets/images/player/default.jpg';
 // import { computed } from '@vue/composition-api';
 
 const icon = {
   alive: iconAlive,
-  killed: iconSkull,
-  voted: iconVoted,
+  dead: iconSkull,
   isSheriff: iconSheriff,
 };
 
 const statusMap = {
   isSheriff: '警长',
-  killed: '被杀',
+  dead: '死亡',
   alive: '存活',
-  voted: '踢出',
 };
 
 export default {
