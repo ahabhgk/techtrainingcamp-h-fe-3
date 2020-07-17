@@ -95,7 +95,7 @@ export default {
     };
 
     const handleGameStart = () => {
-      pushPath('/player', { token: state.token, room: state.number });
+      pushPath('/player/index', { token: state.token, room: state.number });
       state.tipIsShow = false;
     };
 
