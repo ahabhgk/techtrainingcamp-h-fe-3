@@ -6,7 +6,7 @@ export const roleType = {
   SEER: 'seer',
   SHERIFF: 'sheriff',
   VILLAGER: 'villager',
-  WEWEWOLF: 'werewolf',
+  WEREWOLF: 'werewolf',
   WITCH: 'witch',
 };
 export const roleActions = ['sheriff', 'cured', 'poisoned', 'killed', 'voted'];
