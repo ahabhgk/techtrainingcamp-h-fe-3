@@ -3,7 +3,7 @@
     <div class="title">
       <img v-if="timeSelection()" src="@/assets/images/icon/moon.png" width="35px">
       <img v-else src="@/assets/images/icon/sun.png" width="35px">
-      <span>第{{state.allStatus.data.day}}天，
+      <span>第{{state.allStatus.data.day}}天
         {{state.timeInfo[state.allStatus.data.time]}}
       </span>
     </div>
@@ -127,7 +127,12 @@ export default {
     });
 
     function getResult() {
-      this.$router.push('/result');
+      this.$router.push({
+        path: '/result',
+        query: {
+          room: state.param.room,
+        },
+      });
     }
 
     function timeSelection() {
