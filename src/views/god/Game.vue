@@ -13,6 +13,7 @@
         :key="player.name"
         :name="player.name"
         :role="player.role"
+        :isSheriff="player.isSheriff"
         :status="player.status"
         :killedBy="player.killedBy"
         :killedAt="player.killedAt"
@@ -57,7 +58,6 @@ import useRouter from 'utils/use-router';
 import * as godApi from 'network/god';
 import PlayerStatus from 'components/god/PlayerStatus.vue';
 import Dialog from 'components/common/dialog.vue';
-// import { roleType } from 'constants';
 import iconEnd from 'assets/images/icon/end.png';
 import iconDay from 'assets/images/icon/day.png';
 import iconNight from 'assets/images/icon/night.png';
@@ -70,72 +70,7 @@ export default {
   },
   setup() {
     const state = reactive({
-      players: [
-        // {
-        //   name: '玩家1',
-        //   status: 'dead',
-        //   role: 'witch',
-        //   isSheriff: false,
-        //   killedBy: 'werewolf|vote|hunter|witch',
-        //   killedAt: 1,
-        // },
-        // {
-        //   name: '玩家2',
-        //   status: 'alive',
-        //   role: 'seer',
-        //   isSheriff: false,
-        //   killedBy: 'werewolf|vote|hunter|witch',
-        //   killedAt: 1,
-        // },
-        // {
-        //   name: '玩家3',
-        //   status: 'alive',
-        //   role: 'seer',
-        //   isSheriff: false,
-        //   killedBy: 'werewolf',
-        //   killedAt: 1,
-        // },
-        // {
-        //   name: '玩家4',
-        //   status: 'alive',
-        //   role: 'seer',
-        //   isSheriff: false,
-        //   killedBy: 'werewolf|vote|hunter|witch',
-        //   killedAt: 1,
-        // },
-        // {
-        //   name: '玩家5',
-        //   status: 'alive',
-        //   role: 'seer',
-        //   isSheriff: false,
-        //   killedBy: 'werewolf|vote|hunter|witch',
-        //   killedAt: 1,
-        // },
-        // {
-        //   name: '玩家6',
-        //   status: 'alive',
-        //   role: 'seer',
-        //   isSheriff: false,
-        //   killedBy: 'werewolf|vote|hunter|witch',
-        //   killedAt: 1,
-        // },
-        // {
-        //   name: '玩家名7',
-        //   status: 'alive',
-        //   role: 'seer',
-        //   isSheriff: false,
-        //   killedBy: 'werewolf|vote|hunter|witch',
-        //   killedAt: 1,
-        // },
-        // {
-        //   name: '玩家名字8',
-        //   status: 'alive',
-        //   role: 'seer',
-        //   isSheriff: false,
-        //   killedBy: 'werewolf|vote|hunter|witch',
-        //   killedAt: 1,
-        // },
-      ],
+      players: [],
       time: 'night',
       day: 0,
       isDialogShow: false,
